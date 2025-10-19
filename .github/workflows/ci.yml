@@ -44,13 +44,13 @@ jobs:
       - name: Configure, build and run tests (Linux / macOS)
         if: runner.os != 'Windows'
         run: |
-          chmod +x ./build.sh || true
+          chmod +x ./ci.sh || true
           ./build.sh
         shell: bash
 
       - name: Configure, build and run tests (Windows)
         if: runner.os == 'Windows'
-        run: .\ci.bat Release
+        run: .\ci.cmd Release
         shell: cmd
 
       - name: Upload build artifacts
