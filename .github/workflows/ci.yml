@@ -45,7 +45,7 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           chmod +x ./ci.sh || true
-          ./build.sh
+          ./ci.sh
         shell: bash
 
       - name: Configure, build and run tests (Windows)
