@@ -1,30 +1,21 @@
-// unit_tests.cpp
-// Simple, self-contained unit tests for math_operations::add
-//
-// Build:
-//   g++ -std=c++11 unit_tests.cpp math_operations.cpp -o unit_tests
-// Run:
-//   ./unit_tests
-//
-// The tests use assert and will abort on failure. Successful run prints a confirmation.
-
-#include <iostream>
-#include <cassert>
+#include <gtest/gtest.h>
 #include "math_operations.h"
+#include <limits>
 
-int main() {
+TEST(MathOperationsAdd, BasicCases) {
     using math_ops::add;
 
-    // Basic cases
-    assert(add(0, 0) == 0);
-    assert(add(2, 3) == 5);
-    assert(add(-1, 1) == 0);
-    assert(add(-5, -7) == -12);
+    EXPECT_EQ(add(0, 0), 0);
+    EXPECT_EQ(add(2, 3), 5);
+    EXPECT_EQ(add(-1, 1), 0);
+    EXPECT_EQ(add(-5, -7), -12);
+}
 
-    // Edge-ish cases
-    assert(add(2147483647, 0) == 2147483647); // INT_MAX + 0
-    assert(add(0, -2147483648) == -2147483648); // INT_MIN + 0
+TEST(MathOperationsAdd, EdgeCases) {
+    using math_ops::add;
+    const int int_max = std::numeric_limits<int>::max();
+    const int int_min = std::numeric_limits<int>::min();
 
-    std::cout << "All unit tests passed.\n";
-    return 0;
+    EXPECT_EQ(add(int_max, 0), int_max); // INT_MAX + 0
+    EXPECT_EQ(add(0, int_min), int_min); // INT_MIN + 0
 }
